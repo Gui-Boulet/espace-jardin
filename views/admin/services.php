@@ -1,5 +1,7 @@
 <?php
 
+require_once 'modals/serv-mod.php';
+
 use App\Authentification;
 use App\Connection;
 use App\Table\ServiceTable;
@@ -57,7 +59,5 @@ $services = (new ServiceTable($pdo))->findServices();
       </div>
     </div>
   </div>
-
-  <?php require 'modals/serv-mod.php'; ?>
 
 </main>

@@ -1,4 +1,5 @@
 <?php
+require 'modal/registration-mod.php';
 
 use App\Connection;
 use App\Table\ServiceTable;
@@ -19,9 +20,6 @@ $services = (new ServiceTable($pdo))->findServices();
     </button>
   </div>
 </header>
-
-
-<?php require 'modals/registration-mod.php'; ?>
 
 
 <!-- Services --------------------------------------------------------------------------------------------------------->

@@ -1,3 +1,10 @@
+<?php
+
+use App\HTML\Form;
+
+$form = new Form();
+?>
+
 <!-- Fenêtre modale pour afficher l'image du service / Modal to display the service image ----------------------------->
 
 <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
@@ -50,11 +57,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Voulez-vous vraiment supprimer ce service ?
+        <span>Voulez-vous vraiment supprimer ce service ?</span>
       </div>
       <div class="modal-footer">
         <form action="<?= $router->url('admin_actions_delete') ?>" method="post">
-          <input type="hidden" id="service-id" name="service-id">
+          <?= $form->createInput('hidden', 'id', 'service', '', '') ?>
           <button class="btn bt-default-bis" type="submit">OUI</button>
         </form>
         <button type="button" class="btn bt-default" data-bs-dismiss="modal">NON</button>

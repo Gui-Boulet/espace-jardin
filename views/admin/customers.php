@@ -13,7 +13,6 @@ $pdo = Connection::getPDO();
 // Next scheduled interventions grouped by service and client ordered by week
 $nextInterventions = (new InterventionTable($pdo))->findNextInterventions();
 
-
 // Dernières interventions effectuées groupées par service et client ordonnées par semaine
 // Last interventions carried out grouped by service and customer ordered by week
 $lastInterventions = (new InterventionTable($pdo))->findLastInterventions();
@@ -82,16 +81,9 @@ $services = (new ServiceTable($pdo))->findServices();
                     data-customer-id="<?= $customer->getUserId() ?>">
 
                     <?php
-                      $datasCustomer[] = [
+                      $datasCustomers[] = [
                         "id" => $customer->getUserId(),
                         "name" => $customer->getFirstName() . ' ' . $customer->getLastName(),
-                        "email" => $customer->getEmail(),
-                        "phone" => $customer->getPhone(),
-                        "streetNumber" => $customer->getStreetNumber(),
-                        "street" => $customer->getStreet(),
-                        "zipCode" => $customer->getZipCode(),
-                        "city" => $customer->getCity(),
-                        "country" => $customer->getCountry(),
                         "gardenSize" => $customer->getGardenSize(),
                         "hedgeLength" => $customer->getHedgeLength(),
                         "fruitTree" => $customer->getFruitTree(),
@@ -100,36 +92,35 @@ $services = (new ServiceTable($pdo))->findServices();
                         "bigTree" => $customer->getBigTree(),
                         "note" => $customer->getNote()
                       ];
-                      $json_datasCustomer = json_encode($datasCustomer);
+                      $json_datasCustomer = json_encode($datasCustomers);
                     ?>
                   
                   <?= $customer->getFirstName() . ' ' . $customer->getLastName() ?>
                 </a>
+
+                <!-- Si modification réussie, affichage d'un icône de validation pendant 5 sec -->
+                <!-- If the change is successful, a commit icon will be displayed for 5 seconds -->
+                <?php if (isset($_GET) && !empty($_GET)):
+                  if ($_GET['success'] == 1 && $_GET['id'] == $customer->getUserId()):
+                ?>
+                  <span class="float-end" id="checkIcon"><i class="bi bi-check-circle fs-4 icn-check"></i></span>
+                <?php endif; endif ?>
+
               </div>
             </div>
 
             <div class="card-body">
+
+              <p><?= $customer->getEmail() ?></p>
+              <p><?= $customer->getPhone() ?></p>
+              <p>
+                <span><?= $customer->getStreetNumber() ?></span>
+                <span><?= $customer->getStreet() ?></span><br>
+                <span><?= $customer->getZipCode() ?></span>
+                <span><?= $customer->getCity() ?></span><br>
+                <span><?= $customer->getCountry() ?></span>
+              </p>
               <div class="collapse" id="<?= $customer->getInitials() . $customer->getUserId() ?>">
-                <p>
-                  <?= $customer->getPhone() ?>
-                </p>
-                <p>
-                  <span>
-                    <?= $customer->getStreetNumber() ?>
-                  </span>
-                  <span>
-                    <?= $customer->getStreet() ?>
-                  </span><br>
-                  <span>
-                    <?= $customer->getZipCode() ?>
-                  </span>
-                  <span>
-                    <?= $customer->getCity() ?>
-                  </span><br>
-                  <span>
-                    <?= $customer->getCountry() ?>
-                  </span>
-                </p>
                 <h5>Messages</h5>
                 <div class="card card-body mx-auto clp-customer">
 

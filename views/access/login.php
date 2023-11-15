@@ -1,18 +1,21 @@
+<?php
+
+use App\HTML\Form;
+
+$form = new Form();
+?>
+
 <!-- Login form ------------------------------------------------------------------------------------------------------->
 
 <div class="container text-center log">
   <div class="container mb-2 pt-5">
-    <img src="./images/logo-espace-jardins.png" alt="Logo du site" class="mx-auto d-block log-logo">
+    <a href="<?= $router->url('home') ?>">
+      <img class="mx-auto d-block log-logo" src="./images/logo-espace-jardins.png" alt="Logo du site">
+    </a>
   </div>
   <form class="container log-form" action="">
-    <div class="form-floating mb-3">
-      <input class="form-control" type="email" name="email" id="floatingInput" placeholder="Login" required>
-      <label for="floatingInput">E-mail</label>
-    </div>
-    <div class="form-floating mb-3">
-      <input class="form-control" type="password" name="password" id="floatingPassword" placeholder="Password" required>
-      <label for="floatingPassword">Mot de passe</label>
-    </div>
+    <?= $form->createInput('email', 'email', 'user', 'Email', 'mb-3') ?>
+    <?= $form->createInput('password', 'password', 'user', 'Mot de passe', 'mb-3') ?>
     <div class="d-grid">
       <button class="btn bt-default-bis" type="submit">SE CONNECTER</button>
     </div>

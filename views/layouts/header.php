@@ -4,7 +4,7 @@
 
 <nav class="navbar sticky-top navbar-expand-md">
   <div class="container-fluid">
-    <a class="navbar-brand ms-2" href="#">
+    <a class="navbar-brand ms-2"  href="<?= $router->url('home') ?>">
       <img src="./images/logo-espace-jardins.png" alt="logo" width="80">
     </a>
     <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
@@ -49,7 +49,7 @@
 
 <nav class="navbar sticky-top navbar-expand-md">
   <div class="container-fluid">
-    <a class="navbar-brand ms-2 ms-sm-4" href="#">
+    <a class="navbar-brand ms-2 ms-sm-4"  href="<?= $router->url('home') ?>">
       <img src="./images/logo-espace-jardins.png" alt="logo" width="80">
     </a>
     <div class="">
