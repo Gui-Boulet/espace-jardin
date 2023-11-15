@@ -5,9 +5,7 @@ use App\Router;
 # Inclu le fichier autoload.php
 require  dirname(__DIR__) . '/vendor/autoload.php';
 
-$whoops = new \Whoops\Run;
-$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-$whoops->register();
+
 
 $router = new Router(dirname(__DIR__) . '/views');
 $router
