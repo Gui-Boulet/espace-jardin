@@ -20,7 +20,7 @@ class Message {
   }
   public function getComment(): string
   {
-    return htmlspecialchars($this->comment);
+    return htmlspecialchars($this->comment, ENT_NOQUOTES);
   }
   public function getSeen(): bool
   {

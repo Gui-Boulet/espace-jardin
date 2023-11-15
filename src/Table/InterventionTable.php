@@ -8,41 +8,39 @@ use App\Model\Service;
 
 final class InterventionTable extends Table {
 
-  protected $table = 'interventions AS i';
+  protected $table = 'interventions';
   protected $class = Intervention::class;
+  protected $fetchFunction = 'fetchAll';
 
   // Retourne la liste des interventions ordonnées par semaine - Returns the list of interventions ordered by week
   public function findInterventions(): array
   {
-    $this->sql = $this->makeQuery(
-      'SELECT',
-      ['i.id', 'i.week', 'customer_id', 'service_id'],
-      ['services AS s ON s.id = i.service_id', 'customers AS c ON c.user_id = i.customer_id'],
-      '',
-      [],
-      'i.week'
-    );
+    $this->sql = "
+      SELECT i.id, i.week, customer_id, service_id
+      FROM {$this->table} AS i
+      JOIN services AS s ON s.id = i.service_id
+      JOIN customers AS c ON c.user_id = i.customer_id
+      ORDER BY i.week
+    ";
     $interventions['inter'] = $this->getDatasClass();
 
-    $this->sql = $this->makeQuery(
-      'SELECT',
-      ['s.name'],
-      ['services AS s ON s.id = i.service_id', 'customers AS c ON c.user_id = i.customer_id'],
-      '',
-      [],
-      'i.week'
-    );
+    $this->sql = "
+      SELECT s.name
+      FROM {$this->table} AS i
+      JOIN services AS s ON s.id = i.service_id
+      JOIN customers AS c ON c.user_id = i.customer_id
+      ORDER BY i.week
+    ";
     $this->class = Service::class;
     $interventions['serv'] = $this->getDatasClass();
 
-    $this->sql = $this->makeQuery(
-      'SELECT',
-      ['c.first_name', 'c.last_name', 'c.phone', 'c.street_number', 'c.street', 'c.zip_code', 'c.city', 'c.country'],
-      ['services AS s ON s.id = i.service_id', 'customers AS c ON c.user_id = i.customer_id'],
-      '',
-      [],
-      'i.week'
-    );
+    $this->sql = "
+      SELECT c.first_name, c.last_name, c.phone, c.street_number, c.street, c.zip_code, c.city, c.country
+      FROM {$this->table} AS i
+      JOIN services AS s ON s.id = i.service_id
+      JOIN customers AS c ON c.user_id = i.customer_id
+      ORDER BY i.week
+    ";
     $this->class = Customer::class;
     $interventions['cust'] = $this->getDatasClass();
     return $interventions;
@@ -52,14 +50,13 @@ final class InterventionTable extends Table {
   // Returns next scheduled interventions grouped by service and client ordered by week
   public function findNextInterventions(): array
   {
-    $this->sql = $this->makeQuery(
-      'SELECT',
-      ['i.service_id', 'i.customer_id', 'MIN(i.week) AS week'],
-      [],
-      'CAST(i.week AS UNSIGNED) >= CONCAT(YEAR(NOW()), WEEK(NOW(), 1))',
-      ['i.service_id', 'i.customer_id'],
-      'week'
-    );
+    $this->sql = "
+      SELECT i.service_id, i.customer_id, MIN(i.week) AS week
+      FROM {$this->table} AS i
+      WHERE CAST(i.week AS UNSIGNED) >= CONCAT(YEAR(NOW()), WEEK(NOW(), 1))
+      GROUP BY i.service_id, i.customer_id
+      ORDER BY week
+    ";
     return $this->getDatasClass();
   }
 
@@ -67,14 +64,13 @@ final class InterventionTable extends Table {
   // Returns last interventions carried out grouped by service and customer ordered by week
   public function findLastInterventions(): array
   {
-    $this->sql = $this->makeQuery(
-      'SELECT',
-      ['i.service_id', 'i.customer_id', 'MAX(i.week) AS week'],
-      [],
-      'CAST(i.week AS UNSIGNED) < CONCAT(YEAR(NOW()), WEEK(NOW(), 1))',
-      ['i.service_id', 'i.customer_id'],
-      'week'
-    );
+    $this->sql = "
+      SELECT i.service_id, i.customer_id, MAX(i.week) AS week
+      FROM {$this->table} AS i
+      WHERE CAST(i.week AS UNSIGNED) < CONCAT(YEAR(NOW()), WEEK(NOW(), 1))
+      GROUP BY i.service_id, i.customer_id
+      ORDER BY week
+    ";
     return $this->getDatasClass();
   }
 }

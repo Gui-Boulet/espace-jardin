@@ -48,11 +48,11 @@ class Router {
       case 'access/login':
         require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
         break;
-      case 'admin/admin':
       case 'admin/interventions':
       case 'admin/customers':
       case 'admin/services':
       case 'admin/actions/delete':
+      case 'admin/actions/edit':
         $header = 'admin';
         require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/header.php';
         require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
