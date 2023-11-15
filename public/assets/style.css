@@ -162,11 +162,6 @@ main h2 {
   background-color: var(--greenlight);
   border-color: var(--greenleaf);
 }
-.txt-message {
-  background-color: var(--light);
-  min-width: 250px;
-  height: 100px;
-}
 .slc-week {
   min-width: 220px;
 }

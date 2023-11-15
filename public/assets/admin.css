@@ -133,15 +133,21 @@ nav .bt-nav:focus {
   text-decoration: underline;
 }
 .inp-search {
-  min-width: 255px;
+  min-width: 270px;
   max-width: 600px;
 }
-.lbl-garden {
-  width: 130px;
+.icn-check {
+  color: var(--greenleaf);
 }
 .clp-customer {
   background-color: var(--light);
 }
 .cd-space {
-  min-width: 300px;
+  min-width: 320px;
+}
+
+/* Modals ----------------------------------------------------------------------------------------------------------- */
+
+.mdl-background {
+  background-color: var(--white);
 }

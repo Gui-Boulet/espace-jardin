@@ -14,10 +14,9 @@ $router
   ->get('/', 'access/index', 'home')
   ->get('/login', 'access/login', 'login')
   ->get('/account', 'user/account', 'account')
-  ->get('/admin', 'admin/admin', 'admin')
   ->get('/admin-interventions', 'admin/interventions', 'admin_interventions')
   ->get('/admin-customers', 'admin/customers', 'admin_customers')
   ->get('/admin-services', 'admin/services', 'admin_services')
-  ->post('/admin-actions-edit', 'admin/actions/edit', 'admin_actions_edit')
   ->post('/admin-actions-delete', 'admin/actions/delete', 'admin_actions_delete')
+  ->post('/admin-actions-edit', 'admin/actions/edit', 'admin_actions_edit')
   ->run();
