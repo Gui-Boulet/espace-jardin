@@ -3,11 +3,13 @@
 namespace App\Table;
 
 use App\Model\Message;
+use PDO;
 
 final class MessageTable extends Table {
 
   protected $table = 'messages';
   protected $class = Message::class;
+  protected $fetchMode = PDO::FETCH_CLASS;
   protected $fetchFunction = 'fetchAll';
 
   // Retourne la liste des messages ordonnés du plus récent au plus ancien groupés par id et user_id
@@ -20,7 +22,7 @@ final class MessageTable extends Table {
       GROUP BY m.id, m.user_id
       ORDER BY m.date_comment DESC
     ";
-    return $this->getDatasClass();
+    return $this->getDatas();
   }
 
   // Retourne le nombre de messages non lus - Returns the number of unread messages
@@ -33,6 +35,6 @@ final class MessageTable extends Table {
       GROUP BY m.user_id
     ";
     $this->param = ['seen' => 1];
-    return $this->getDatasClass();
+    return $this->getDatas();
   }
 }

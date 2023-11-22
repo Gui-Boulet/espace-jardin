@@ -4,28 +4,21 @@ namespace App\HTML;
 
 class Form {
 
-  private $errors;
-  
-  /*public function __construct(array $errors)
-  {
-    $this->errors = $errors;
-  }*/
-
   // Retourne un élément HTML input - Returns an HTML input element
   public function createInput(string $type, string $key, string $id, string $label, string $spacing): string
   {
     if ($type !== 'hidden'){
       return <<<HTML
-      <div class="{$this->getSpacingClass($spacing)}">
-        <input class="form-control" type="{$type}" name="{$key}" id="{$id}-{$key}" placeholder="{$label}" required>
-        <label for="{$id}-{$key}">$label</label>
-      </div>
+        <div class="{$this->getSpacingClass($spacing)}">
+          <input class="form-control" type="{$type}" name="{$key}" id="{$id}-{$key}" placeholder="{$label}" required>
+          <label for="{$id}-{$key}">$label</label>
+        </div>
 HTML;
     } else {
       return <<<HTML
-      <div class="{$this->getSpacingClass($spacing)}">
-        <input class="form-control" type="{$type}" name="{$key}" id="{$id}-{$key}" placeholder="{$label}">
-      </div>
+        <div class="{$this->getSpacingClass($spacing)}">
+          <input class="form-control" type="{$type}" name="{$key}" id="{$id}-{$key}" placeholder="{$label}">
+        </div>
 HTML; 
     }
   }
@@ -75,5 +68,44 @@ HTML;
       $classDiv .= ' ' . $spacing;
     }
     return $classDiv;
+  }
+
+  // Retourne un élément HTML small avec un message d'erreur - Returns an HTML small element with an error message
+  public function displayErrorMessage(string $field, string $key, string $id): string
+  {
+    switch ($field) {
+      case 'int5':
+        $result = "Numéro de 5 chiffres (Donnée requise)";
+        break;
+      case 'int13':
+        $result = "Numéro de 13 chiffres en commençant par 0033 (Donnée requise)";
+        break;
+      case 'int50':
+        $result = "Nombre entre 0 et 50 (Donnée requise)";
+        break;
+      case 'int2000':
+        $result = "Nombre entre 0 et 2000 (Donnée requise)";
+        break;
+      case 'intstr5':
+        $result = "Nombre entre 1 et 9999, peut finir par une lettre (Donnée requise)";
+        break;
+      case 'str30':
+        $result = "Entre 3 et 30 lettres (Donnée requise)";
+        break;
+      case 'strEmail':
+        $result = "Entre 6 et 100 caractères | @ et . inclus (Donnée requise)";
+        break;
+      case 'str200':
+        $result = "Entre 5 et 200 caractères (Donnée requise)";
+        break;
+      case 'strNotReq':
+        $result = "Caractères <>/\\&;\" interdits et maximum 250";
+        break;
+    }
+    return <<<HTML
+      <small class="invalid-feedback d-none" id="{$id}-{$key}-error">
+        $result
+      </small>
+HTML;
   }
 }

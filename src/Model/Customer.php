@@ -25,41 +25,89 @@ class Customer extends User {
   {
     return htmlspecialchars($this->first_name, ENT_NOQUOTES);
   }
+  public function setFirstName(string $first_name): self
+  {
+    $this->first_name = htmlspecialchars($first_name, ENT_NOQUOTES);
+    return $this;
+  }
+
   public function getLastName(): string
   {
     return htmlspecialchars($this->last_name, ENT_NOQUOTES);
   }
+  public function setLastName(string $last_name): self
+  {
+    $this->last_name = htmlspecialchars($last_name, ENT_NOQUOTES);
+    return $this;
+  }
+
   public function getInitials(): string
   {
     $initialFirstName = substr(self::getFirstName(), 0, 1);
     $initialLastName = substr(self::getLastName(), 0, 1);
     return strtoupper($initialFirstName . $initialLastName);
   }
+
   public function getPhone(): string
   {
     $prefix = chunk_split(substr(htmlspecialchars($this->phone), 0, 5), 2, ' ');
     $lineNumber = trim(chunk_split(substr(htmlspecialchars($this->phone), -8), 2, ' '));
     return $prefix . $lineNumber;
   }
+  public function setPhone(string $phone): self
+  {
+    $this->phone = htmlspecialchars($phone);
+    return $this;
+  }
+
   public function getStreetNumber(): string
   {
     return htmlspecialchars($this->street_number);
   }
+  public function setStreetNumber(string $street_number): self
+  {
+    $this->street_number = htmlspecialchars($street_number);
+    return $this;
+  }
+
   public function getStreet(): string
   {
     return htmlspecialchars($this->street, ENT_NOQUOTES);
   }
+  public function setStreet(string $street): self
+  {
+    $this->street = htmlspecialchars($street, ENT_NOQUOTES);
+    return $this;
+  }
+
   public function getZipCode(): int
   {
     return $this->zip_code;
   }
+  public function setZipCode(int $zip_code): self
+  {
+    $this->zip_code = $zip_code;
+    return $this;
+  }
+
   public function getCity(): string
   {
     return htmlspecialchars($this->city, ENT_NOQUOTES);
   }
+  public function setCity(string $city): self
+  {
+    $this->city = htmlspecialchars($city, ENT_NOQUOTES);
+    return $this;
+  }
+
   public function getCountry(): string
   {
-    return htmlspecialchars($this->country);
+    return htmlspecialchars($this->country, ENT_NOQUOTES);
+  }
+  public function setCountry(string $country): self
+  {
+    $this->country = htmlspecialchars($country, ENT_NOQUOTES);
+    return $this;
   }
 
   public function getGardenSize(): string
@@ -132,7 +180,7 @@ class Customer extends User {
     return $this;
   }
   
-  public function getUserId(): int
+  public function getUserId(): string
   {
     return $this->user_id;
   }

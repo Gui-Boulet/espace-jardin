@@ -29,7 +29,7 @@ class Intervention {
       fn($start, $length): string => substr(htmlspecialchars($this->frequency), $start, $length), [0, 1], [1]);
     return $frequency;
   }
-  public function getCustomerId(): int
+  public function getCustomerId(): string
   {
     return $this->customer_id;
   }

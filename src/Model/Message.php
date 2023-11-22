@@ -26,7 +26,7 @@ class Message {
   {
     return $this->seen;
   }
-  public function getUserId(): int
+  public function getUserId(): string
   {
     return $this->user_id;
   }

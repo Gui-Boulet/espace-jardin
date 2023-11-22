@@ -5,11 +5,13 @@ namespace App\Table;
 use App\Model\Customer;
 use App\Model\Intervention;
 use App\Model\Service;
+use PDO;
 
 final class InterventionTable extends Table {
 
   protected $table = 'interventions';
   protected $class = Intervention::class;
+  protected $fetchMode = PDO::FETCH_CLASS;
   protected $fetchFunction = 'fetchAll';
 
   // Retourne la liste des interventions ordonnées par semaine - Returns the list of interventions ordered by week
@@ -22,7 +24,7 @@ final class InterventionTable extends Table {
       JOIN customers AS c ON c.user_id = i.customer_id
       ORDER BY i.week
     ";
-    $interventions['inter'] = $this->getDatasClass();
+    $interventions['inter'] = $this->getDatas();
 
     $this->sql = "
       SELECT s.name
@@ -32,7 +34,7 @@ final class InterventionTable extends Table {
       ORDER BY i.week
     ";
     $this->class = Service::class;
-    $interventions['serv'] = $this->getDatasClass();
+    $interventions['serv'] = $this->getDatas();
 
     $this->sql = "
       SELECT c.first_name, c.last_name, c.phone, c.street_number, c.street, c.zip_code, c.city, c.country
@@ -42,7 +44,7 @@ final class InterventionTable extends Table {
       ORDER BY i.week
     ";
     $this->class = Customer::class;
-    $interventions['cust'] = $this->getDatasClass();
+    $interventions['cust'] = $this->getDatas();
     return $interventions;
   }
 
@@ -57,7 +59,7 @@ final class InterventionTable extends Table {
       GROUP BY i.service_id, i.customer_id
       ORDER BY week
     ";
-    return $this->getDatasClass();
+    return $this->getDatas();
   }
 
   // Retourne les dernières interventions effectuées groupées par service et client ordonnées par semaine
@@ -71,6 +73,6 @@ final class InterventionTable extends Table {
       GROUP BY i.service_id, i.customer_id
       ORDER BY week
     ";
-    return $this->getDatasClass();
+    return $this->getDatas();
   }
 }
