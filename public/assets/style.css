@@ -114,15 +114,16 @@ nav {
 }
 
 .header h1 {
-  color: var(--light);
+  color: var(--white);
   font-size: 4em;
 }
 
 .header h4 {
   color: var(--greenlight);
 }
-.header button {
-  margin-top: 350px;
+
+.header p {
+  color: var(--light);
 }
 
 /* Modal ---------------------------------------------------------------------------*/
