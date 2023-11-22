@@ -25,8 +25,9 @@ if (!empty($_POST)) {
     ->setBigTree($_POST['big_tree'])
     ->setNote($_POST['note']);
   
+  // Modification des données du jardin du client - Updating of the customer's garden data
   $customerTable->updateCustomerGarden($customerGarden);
   $success = 1;
 }
-// Redirige vers la page administration des services - Redirects to services administration page
+// Redirige vers la page administration des clients - Redirects to customers administration page
 header('Location: ' . $router->url('admin_customers') . "?success={$success}&id={$_POST['user_id']}");

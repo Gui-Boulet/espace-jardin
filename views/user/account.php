@@ -7,10 +7,9 @@ use App\HTML\Form;
 
 Authentification::check();
 
+$jsFile = 'user';
 $form = new Form();
 $pdo = Connection::getPDO();
-
-
 ?>
 
 <!-- Account Section -------------------------------------------------------------------------------------------------->

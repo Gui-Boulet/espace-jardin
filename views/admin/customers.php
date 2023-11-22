@@ -9,6 +9,8 @@ Authentification::check();
 $cssFile = $jsFile = 'admin';
 $pdo = Connection::getPDO();
 
+require 'modals/cust-mod.php';
+
 // Prochaines interventions prévues groupées par service et client ordonnées par semaine
 // Next scheduled interventions grouped by service and client ordered by week
 $nextInterventions = (new InterventionTable($pdo))->findNextInterventions();
@@ -36,9 +38,9 @@ $services = (new ServiceTable($pdo))->findServices();
 
 <main class="admin">
 
-  <div class="text-center pt-5" id="div-clients">
+  <div class="text-center pt-3" id="div-clients">
 
-    <div class="my-2">
+    <div class="my-3">
       <h2>Clients</h2>
     </div>
 
@@ -103,7 +105,9 @@ $services = (new ServiceTable($pdo))->findServices();
                 <?php if (isset($_GET) && !empty($_GET)):
                   if ($_GET['success'] == 1 && $_GET['id'] == $customer->getUserId()):
                 ?>
-                  <span class="float-end" id="checkIcon"><i class="bi bi-check-circle fs-4 icn-check"></i></span>
+                  <span class="float-end d-block" id="checkIcon">
+                    <i class="bi bi-check-circle fs-4 icn-check"></i>
+                  </span>
                 <?php endif; endif ?>
 
               </div>
@@ -248,7 +252,6 @@ $services = (new ServiceTable($pdo))->findServices();
 
     </div>
   </div>
-  <?php require 'modals/cust-mod.php'; ?>
 
 </main>
 

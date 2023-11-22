@@ -9,7 +9,7 @@ $form = new Form();
 
 <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content px-4 pb-4">
+    <div class="modal-content px-4 pb-4 mdl-background">
       <button type="button" class="btn-close m-1" data-bs-dismiss="modal" aria-label="Close"></button>
       <!-- Chemin d'accès à l'image et nom du service / Image path and service name -->
       <img src="" alt="" id="service-image">
@@ -19,9 +19,10 @@ $form = new Form();
 
 <!-- Fenêtre modale pour créer un service / Modal to create a service ------------------------------------------------->
 
-<div class="modal fade" id="createServiceModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="createServiceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content mdl-background">
       <div class="modal-header">
         <h1 class="modal-title fs-3">
           Créer un service
@@ -47,9 +48,10 @@ $form = new Form();
 
 <!-- Fenêtre modale pour supprimer un service / Modal to delete a service --------------------------------------------->
 
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content mdl-background">
       <div class="modal-header">
         <h4 class="modal-title" id="service-name">
           <!-- Nom du service / Service Name -->

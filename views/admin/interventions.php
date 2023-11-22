@@ -19,9 +19,9 @@ $interventions = (new InterventionTable($pdo))->findInterventions();
 <!-- Page interventions / Interventions page -------------------------------------------------------------------------->
 
 <main class="admin">
-  <div class="text-center pt-5" id="div-interventions">
+  <div class="text-center pt-3" id="div-interventions">
 
-    <div class="my-2">
+    <div class="my-3">
       <h2>Interventions planifiées</h2>
     </div>
     

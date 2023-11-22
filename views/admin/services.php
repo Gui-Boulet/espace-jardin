@@ -19,14 +19,14 @@ $services = (new ServiceTable($pdo))->findServices();
 <!-- Page services / Services page ------------------------------------------------------------------------------------>
 
 <main class="admin">
-  <div class="text-center pt-5" id="div-services">
+  <div class="text-center pt-3" id="div-services">
 
-    <div class="my-2">
+    <div class="my-3">
       <h2>Services</h2>
     </div>
 
-    <div class="row justify-content-center px-5">
-      <div class="col-3 cd-space">
+    <div class="row justify-content-center px-3">
+      <div class="col-3 mb-2 cd-space">
         <div class="card shadow">
           <div class="card-body">
             <ul class="list-group list-group-flush">
@@ -36,7 +36,7 @@ $services = (new ServiceTable($pdo))->findServices();
                   <a href="#imageModal" data-bs-toggle="modal"
                       data-service-name="<?= $service->getName() ?>"
                       data-service-fileName="<?= $service->getFileName() ?>">
-                    <img class="" src="./images/<?= $service->getFileName() ?>.jpg" width="50px"
+                    <img class="img-thumbnail" src="./images/<?= $service->getFileName() ?>.jpg" width="55"
                       alt="<?= $service->getName() ?>">
                   </a>
                   <span class="mx-2"><?= $service->getName() ?></span>

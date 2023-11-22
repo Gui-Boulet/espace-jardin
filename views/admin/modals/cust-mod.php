@@ -33,7 +33,8 @@ $gardenSizes = str_replace("'", "", explode(',', substr($typeGardenSizes['Type']
 
 <!-- Fenêtre modale pour afficher les informations du client / Modal to display customer's informations --------------->
 
-<div class="modal fade" id="customerModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="customerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content mdl-background">
       <div class="modal-header">
@@ -53,24 +54,38 @@ $gardenSizes = str_replace("'", "", explode(',', substr($typeGardenSizes['Type']
               <?= $form->createSelect('garden_size', 'customer', 'Surface', '', $gardenSizes) ?>
               <span class="input-group-text">m<sup>2</sup></span>
             </div>
+            
             <div class="input-group mb-2">
               <!-- Longueur de haies du jardin / Garden hedge length -->
               <?= $form->createInput('text', 'hedge_length', 'customer', 'Haies', '') ?>
               <span class="input-group-text">m</span>
             </div>
+            <?= $form->displayErrorMessage('int2000', 'hedge_length', 'customer') ?>
+
             <!-- Nombre d'arbres fruitiers / Number of Fruit Trees -->
             <?= $form->createInput('text', 'fruit_tree', 'customer', 'Arbres fruitiers', 'mb-2') ?>
+            <?= $form->displayErrorMessage('int50', 'fruit_tree', 'customer') ?>
+            
             <!-- Nombre d'arbustes / Number of shrubs -->
             <?= $form->createInput('text', 'shrub', 'customer', 'Arbustes', 'mb-2') ?>
+            <?= $form->displayErrorMessage('int50', 'shrub', 'customer') ?>
+            
             <!-- Nombre de petits arbres / Number of small trees -->
             <?= $form->createInput('text', 'small_tree', 'customer', 'Petits arbres', 'mb-2') ?>
+            <?= $form->displayErrorMessage('int50', 'small_tree', 'customer') ?>
+            
             <!-- Nombre de grands arbres / Number of big trees -->
             <?= $form->createInput('text', 'big_tree', 'customer', 'Grands arbres', 'mb-2') ?>
+            <?= $form->displayErrorMessage('int50', 'big_tree', 'customer') ?>
+            
             <!-- Notes à propos du client / Notes about the customer -->
             <?= $form->createTextarea('note', 'customer', 'Notes', 'mb-3') ?>
+            <?= $form->displayErrorMessage('strNotReq', 'note', 'customer') ?>
 
             <?= $form->createInput('hidden', 'user_id', 'customer', '', '') ?>
-            <button class="btn px-5 py-2 bt-default" type="submit">Modifier</button>
+            <button class="btn px-5 py-2 bt-default" id="customer-submit" type="button">
+              Modifier
+            </button>
           </fieldset>
         </form>
 

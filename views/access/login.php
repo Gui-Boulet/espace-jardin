@@ -2,6 +2,7 @@
 
 use App\HTML\Form;
 
+$jsFile = 'login';
 $form = new Form();
 ?>
 
