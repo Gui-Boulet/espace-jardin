@@ -5,7 +5,10 @@ use App\Authentification;
 use App\Connection;
 use App\HTML\Form;
 
-Authentification::check();
+if (!Authentification::check('user')) {
+  header('Location: ' . $router->url('home'));
+  exit();
+}
 
 $jsFile = 'user';
 $form = new Form();
