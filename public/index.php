@@ -11,9 +11,11 @@ $whoops->register();
 
 $router = new Router(dirname(__DIR__) . '/views');
 $router
+/*   ->get('/fill', 'command/fill', 'fill') */
   ->get('/', 'access/index', 'home')
   ->post('/actions-insert', 'access/actions/insert', 'actions_insert')
-  ->get('/login', 'access/login', 'login')
+  ->getAndPost('/login', 'access/login', 'login')
+  ->post('/logout', 'access/logout', 'logout')
   ->get('/account', 'user/account', 'account')
   ->get('/admin-interventions', 'admin/interventions', 'admin_interventions')
   ->get('/admin-customers', 'admin/customers', 'admin_customers')
