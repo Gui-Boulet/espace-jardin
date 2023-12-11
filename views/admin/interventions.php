@@ -5,10 +5,12 @@ use App\Connection;
 use App\Method;
 use App\Table\InterventionTable;
 
-Authentification::check();
+if (!Authentification::check('admin')) {
+  header('Location: ' . $router->url('home'));
+  exit();
+}
 
 $cssFile = $jsFile = 'admin';
-$link = $router->url('admin_interventions');
 
 $pdo = Connection::getPDO();
 

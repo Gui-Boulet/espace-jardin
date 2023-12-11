@@ -6,7 +6,10 @@ use App\Authentification;
 use App\Connection;
 use App\Table\ServiceTable;
 
-Authentification::check();
+if (!Authentification::check('admin')) {
+  header('Location: ' . $router->url('home'));
+  exit();
+}
 
 $cssFile = $jsFile = 'admin';
 $pdo = Connection::getPDO();

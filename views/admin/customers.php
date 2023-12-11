@@ -4,7 +4,10 @@ use App\Authentification;
 use App\Connection;
 use App\Table\{CustomerTable, InterventionTable, MessageTable, ServiceTable};
 
-Authentification::check();
+if (!Authentification::check('admin')) {
+  header('Location: ' . $router->url('home'));
+  exit();
+}
 
 $cssFile = $jsFile = 'admin';
 $pdo = Connection::getPDO();
@@ -46,7 +49,7 @@ $services = (new ServiceTable($pdo))->findServices();
 
     <div class="row justify-content-center my-5 px-5">
       <form class="d-flex align-content-center justify-content-center flex-wrap" role="search">
-        <input class="form-control me-md-2 my-2 inp-search" type="search" placeholder="Filtre AJAX sinon t'es viré"
+        <input class="form-control me-md-2 my-2 inp-search" type="search" placeholder="1ères lettres du nom de famille"
           aria-label="Search">
         <button class="btn my-2 bt-default-bis" type="submit">
           Rechercher
@@ -102,13 +105,11 @@ $services = (new ServiceTable($pdo))->findServices();
 
                 <!-- Si modification réussie, affichage d'un icône de validation pendant 5 sec -->
                 <!-- If the change is successful, a commit icon will be displayed for 5 seconds -->
-                <?php if (isset($_GET) && !empty($_GET)):
-                  if ($_GET['success'] == 1 && $_GET['id'] == $customer->getUserId()):
-                ?>
+                <?php if ((isset($_SESSION['id'])) && $_SESSION['id'] === $customer->getUserId()): ?>
                   <span class="float-end d-block" id="checkIcon">
                     <i class="bi bi-check-circle fs-4 icn-check"></i>
                   </span>
-                <?php endif; endif ?>
+                <?php endif ?>
 
               </div>
             </div>
@@ -249,6 +250,7 @@ $services = (new ServiceTable($pdo))->findServices();
           </div>
         </div>
       <?php endforeach; ?>
+      <?php unset($_SESSION['id']); ?>
 
     </div>
   </div>
