@@ -21,7 +21,7 @@
   <hr>
   <div class="row py-2">
     <div class="col-md-6">
-      Copyright© <?php echo date('Y'); ?> - Espace Jardins
+      Copyright© <?= date('Y') ?> - Espace Jardins
     </div>
     <div class="col-md-6">
       Tous droits réservés

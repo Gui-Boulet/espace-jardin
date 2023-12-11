@@ -1,6 +1,16 @@
-<?php switch ($header): case 'admin': ?>
+<?php
 
-<!-- Barre de navigation admin / Admin navigation bar ----------------------------------------------------------------->
+use App\Authentification;
+
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+  if (empty($_SESSION)) {
+    $connection = ['url' => 'login', 'button' => 'SE CONNECTER'];
+  } else {
+    $connection = ['url' => 'logout', 'button' => 'DÉCONNEXION'];
+  }
+}
+?>
 
 <nav class="navbar sticky-top navbar-expand-md">
   <div class="container-fluid">
@@ -13,54 +23,52 @@
     </button>
     <div class="collapse navbar-collapse mt-md-0 mt-4 ms-2" id="navbarToggler">
       <ul class="nav ms-auto me-2 list-group list-group-horizontal-md">
-
-        <li class="nav-item mb-md-0 me-3 mb-3">
-          <a class="nav-link py-md-3 bt-nav" href="" role="button">
-            <i class="bi bi-envelope fs-3"></i>
-          </a>
-        </li>
-        <li class="nav-item mt-md-2 me-3 mb-3">
-          <a class="nav-link py-md-3 bt-nav" href="<?= $router->url('admin_interventions') ?>" role="button">
-            INTERVENTIONS
-          </a>
-        </li>
-        <li class="nav-item mt-md-2 me-3 mb-3">
-          <a class="nav-link py-md-3 bt-nav" href="<?= $router->url('admin_customers') ?>" role="button">
-            CLIENTS
-          </a>
-        </li>
-        <li class="nav-item mt-md-2 mb-3">
-          <a class="nav-link py-md-3 bt-nav" href="<?= $router->url('admin_services') ?>" role="button">
-            SERVICES
-          </a>
-        </li>
         
+        <?php
+          if (!empty($_SESSION)):
+            if (Authentification::check('admin')):
+        ?>
+
+          <li class="nav-item my-md-auto me-2 mb-2">
+            <a class="nav-link bt-nav" href="" role="button">
+              <i class="bi bi-envelope fs-3"></i>
+            </a>
+          </li>
+          <li class="nav-item my-md-auto me-2 mb-2">
+            <a class="nav-link bt-nav" href="<?= $router->url('admin_interventions') ?>" role="button">
+              INTERVENTIONS
+            </a>
+          </li>
+          <li class="nav-item my-md-auto me-2 mb-2">
+            <a class="nav-link bt-nav" href="<?= $router->url('admin_customers') ?>" role="button">
+              CLIENTS
+            </a>
+          </li>
+          <li class="nav-item my-md-auto me-2 mb-3">
+            <a class="nav-link bt-nav" href="<?= $router->url('admin_services') ?>" role="button">
+              SERVICES
+            </a>
+          </li>
+
+        <?php elseif (Authentification::check('user')): ?>
+
+          <li class="nav-item my-md-auto me-2 mb-3">
+            <a class="nav-link bt-nav" href="<?= $router->url('account') ?>" role="button">
+              MON COMPTE
+            </a>
+          </li>
+        
+        <?php endif; endif ?>
+
+          <li class="nav-item my-md-auto mx-md-0 mx-3 mb-2">
+            <form action="<?= $router->url($connection['url']) ?>" method="post">
+              <button class="btn nav-link bt-default" type="submit">
+                <?= $connection['button'] ?>
+              </button>
+            </form>
+          </li>
+                
       </ul>
     </div>
   </div>
 </nav>
-
-<?php
-    break;
-  case 'user':
-?>
-
-<!-- Barre de navigation utilisateur / User navigation bar ------------------------------------------------------------>
-
-<nav class="navbar sticky-top navbar-expand-md">
-  <div class="container-fluid">
-    <a class="navbar-brand ms-2 ms-sm-4"  href="<?= $router->url('home') ?>">
-      <img src="./images/logo-espace-jardins.png" alt="logo" width="80">
-    </a>
-    <div class="">
-      <a class="btn nav-link px-3 py-2 me-2 me-sm-4 bt-default" href="<?= $router->url('login') ?>" role="button">
-        <?= $connection ?? 'SE CONNECTER' ?>
-      </a>
-    </div>
-  </div>
-</nav>
-
-<?php 
-    break;
-  endswitch;
-?>
