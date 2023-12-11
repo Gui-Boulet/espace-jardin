@@ -2,7 +2,7 @@
 /* Déclaration de constante - Declaration of constant */
 /* ******************************************************* */
 
-// Ciblage des différentes fenêtres modales - Targeting the different modal
+// Ciblage de la fenêtre modale - Targeting the modal
 const registrationModal = document.getElementById('registrationModal')
 
 /* ****************************************************** */
@@ -100,16 +100,9 @@ registrationModal.addEventListener('show.bs.modal', event => {
     }
 
     // Affichage des messages pour chaque champs si erreurs - Display messages for each field if errors
-    displayErrorMessage(isFieldValid, errorMessage, 'lastName', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'firstName', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'email', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'phone', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'streetNumber', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'street', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'zipCode', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'city', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'country', areaRegistrationModal)
-    displayErrorMessage(isFieldValid, errorMessage, 'comment', areaRegistrationModal)
+    for (let key in errorMessage) {
+      displayErrorMessage(isFieldValid, errorMessage, key, areaRegistrationModal)
+    }
 
     // Si erreur, l'attribut 'type' du bouton vaut 'button', sinon 'submit'
     // If error, the 'type' attribute of the button is set to 'button', else 'submit'
