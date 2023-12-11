@@ -19,10 +19,16 @@ abstract class Table {
   public function __construct(PDO $pdo)
   {
     if ($this->table === null){
-      throw new Exception('La classe ' . get_class($this)) . ' n\'a pas de propriété \$table';
+      throw new Exception('La classe ' . get_class($this) . ' n\'a pas de propriété \$table');
     }
     if ($this->class === null){
-      throw new Exception('La classe ' . get_class($this)) . ' n\'a pas de propriété \$class';
+      throw new Exception('La classe ' . get_class($this) . ' n\'a pas de propriété \$class');
+    }
+    if ($this->fetchMode === null){
+      throw new Exception('La classe ' . get_class($this) . ' n\'a pas de propriété \$fetchMode');
+    }
+    if ($this->fetchFunction === null){
+      throw new Exception('La classe ' . get_class($this) . ' n\'a pas de propriété \$fetchFunction');
     }
     $this->pdo = $pdo;
   }
@@ -39,12 +45,12 @@ abstract class Table {
     return $query;
   }
 
-  // Retourne un tableau d'objets - Returns an array of objects
+  // Retourne les données récupérées - Returns the recovered data
   public function getDatas()
   {    
     $query = $this->initRequest();
 
-    # Définition du mode de récupération des données / Defining the Data Recovery Mode
+    # Définition du mode de récupération des données / Defining the data recovery mode
     if ($this->fetchMode === PDO::FETCH_CLASS) {
       $query->setFetchMode($this->fetchMode, $this->class);
     } else {
@@ -53,6 +59,10 @@ abstract class Table {
 
     # Récupération des données / Retrieve data
     $datas = $query->{$this->fetchFunction}();
+
+    if ($datas === false) {
+      throw new Exception($this->exception);
+    }
 
     return $datas;
   }

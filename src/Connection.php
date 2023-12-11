@@ -14,9 +14,9 @@ class Connection {
   /* Returns a PDO object to connect to the database */
   public static function getPDO(): PDO
   {
+    # Définition du mode de gestion des erreurs et lancement d'une exception de type PDOException
+    # Setting the error handling mode and throwing a PDOException exception
     return new PDO(self::$dsn, self::$username, self::$password,
-      # Définition du mode de gestion des erreurs et lancement d'une exception de type PDOException
-      # Setting the error handling mode and throwing a PDOException exception
       [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
   }
 }

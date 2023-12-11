@@ -2,16 +2,11 @@
 namespace App;
 
 use AltoRouter;
+use App\Security\SecurityException;
 
 class Router {
 
-  /**
-   * @var string
-   */
   private $viewPath;
-  /**
-   * @var AltoRouter
-   */
   private $router;
 
   public function __construct(string $viewPath)
@@ -32,6 +27,12 @@ class Router {
     return $this;
   }
 
+  public function getAndPost(string $url, string $view, ?string $name = null): self
+  {
+    $this->router->map('GET|POST', $url, $view, $name);
+    return $this;
+  }
+
   public function url(string $name, array $params = [])
   {
     return $this->router->generate($name, $params);
@@ -40,33 +41,48 @@ class Router {
   public function run(): self
   {
     $match = $this->router->match();
-    $view = $match['target'];
+    if (!$match) {
+      $view = 'e404';
+    } else {
+      $view = $match['target'];
+    }
     $router = $this;
 
-    ob_start();
-    switch ($view){
-      case 'access/login':
-        require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
-        break;
-      case 'admin/interventions':
-      case 'admin/customers':
-      case 'admin/services':
-      case 'admin/actions/delete':
-      case 'admin/actions/edit':
-        $header = 'admin';
-        require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/header.php';
-        require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
-        break;
-      default:
-        $header = 'user';
-        require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/header.php';
-        require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
-        require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/footer.php';
-    }
-    $content = ob_get_clean();
+    try {
+      ob_start();
+      switch ($view){
+  
+	case 'access/login':
+	case 'access/logout':
+          require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
+          break;
+  
+        #case 'command/fill':
+	case 'e404':
+        case 'admin/interventions':
+        case 'admin/customers':
+        case 'admin/services':
+        case 'admin/actions/delete':
+        case 'admin/actions/edit':
+          require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/header.php';
+          require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
+          break;
+  
+        default:
+          require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/header.php';
+          require $this->viewPath . DIRECTORY_SEPARATOR . $view . '.php';
+          require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/footer.php';
+      }
+      $content = ob_get_clean();
+  
+      require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/default.php';
 
-    require $this->viewPath . DIRECTORY_SEPARATOR . 'layouts/default.php';
-    
+    } catch (SecurityException $e) {
+
+      header('Location: ' . $this->url('login') . '?security=0');
+      exit();
+    }
+
     return $this;
   }
 }

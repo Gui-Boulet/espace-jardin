@@ -101,10 +101,20 @@ HTML;
       case 'strNotReq':
         $result = "Caractères <>/\\&;\" interdits et maximum 250";
         break;
+      case 'strPassword':
+        $result[] = "Entre 8 et 60 caractères (Donnée requise)";
+        $result[] .= "1 majuscule, 1 minuscule, 1 chiffre et 1 caractère spécial inclus";
+        break;
+      case 'login':
+        $result = "Identifiant ou mot de passe incorrect";
+        break;
     }
+    
+    $error = (is_array($result)) ? implode('<br>', $result) : $result;
+    
     return <<<HTML
       <small class="invalid-feedback d-none" id="{$id}-{$key}-error">
-        $result
+        $error
       </small>
 HTML;
   }
