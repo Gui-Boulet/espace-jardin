@@ -11,7 +11,7 @@ $whoops->register();
 
 $router = new Router(dirname(__DIR__) . '/views');
 $router
-/*   ->get('/fill', 'command/fill', 'fill') */
+  #->get('/fill', 'command/fill', 'fill')
   ->get('/', 'access/index', 'home')
   ->post('/actions-insert', 'access/actions/insert', 'actions_insert')
   ->getAndPost('/login', 'access/login', 'login')
@@ -20,6 +20,7 @@ $router
   ->get('/admin-interventions', 'admin/interventions', 'admin_interventions')
   ->get('/admin-customers', 'admin/customers', 'admin_customers')
   ->get('/admin-services', 'admin/services', 'admin_services')
+  ->post('/admin-actions-create', 'admin/actions/create', 'admin_actions_create')
   ->post('/admin-actions-delete', 'admin/actions/delete', 'admin_actions_delete')
-  ->post('/admin-actions-edit', 'admin/actions/edit', 'admin_actions_edit')
+  ->post('/admin-actions-update', 'admin/actions/update', 'admin_actions_update')
   ->run();
