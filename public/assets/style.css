@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:wght@400;500;600&family=Roboto:wght@100;300;400&display=swap');
+
+:root {
+  --greenleaf: #1F6B32;
+  --greengrass: #478E1C;
+  --greenlight: #BEE18E;
+  --light: #E4F7D8;
+  --autumn: #D0762B;
+  --wood: #5A4318;
+  --white: #fbf8e6;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+  
+html {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--light);
+  color: var(--wood);
+  font-weight: 400;
+}
+
+h1,
+h2,
+h3
+  {
+  font-weight: 500;
+  font-family: 'EB Garamond', serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+/* Navbar ---------------------------------------------------------------------------*/
+
+nav {
+  max-width: 1440px;
+  margin: auto;
+  background-color: var(--greengrass);
+}
+nav .bt-nav {
+  color: var(--greenlight);
+}
+nav .bt-nav:hover {
+  color: var(--wood);
+}
+nav .bt-nav:focus {
+  color: var(--wood);
+}
+
+/* Login page ---------------------------------------------------------------------------*/
+
+.log {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--greenlight);
+}
+.log .log-logo {
+  width: 250px;
+}
+@media screen and (min-width:576px) {
+  .log .log-form {
+    width: 425px;
+  }
+}
+
+/* Button ---------------------------------------------------------------------------*/
+
+.bt-default {
+  background-color: var(--light);
+  color: var(--greengrass);
+}
+.bt-default:hover {
+  background-color: var(--greenleaf);
+  color: var(--light);
+}
+.bt-default-bis {
+  background-color: var(--autumn);
+  color: var(--white);
+}
+.bt-default-bis:hover {
+  background-color: var(--wood);
+  color: var(--autumn);
+}
+.bt-big {
+  background-color: var(--greenleaf);
+  color: var(--white);
+  letter-spacing: 0.08em;
+  width: 225px;
+}
+.bt-big:hover {
+  background-color: var(--wood);
+  color: var(--white);
+}
+
+/* Header ---------------------------------------------------------------------------*/
+
+.header {
+  max-width: 1440px;
+  margin: auto;
+  height: 700px;
+  background-image:linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.2),
+      rgba(0, 0, 0, 0.6)), url(../images/hero.png);
+}
+
+.header h1 {
+  color: var(--white);
+  font-size: 4em;
+}
+
+.header h4 {
+  color: var(--greenlight);
+}
+
+.header p {
+  color: var(--light);
+}
+
+/* Modal ---------------------------------------------------------------------------*/
+
+.mdl-background {
+  background-color: var(--light);
+}
+
+/* Services ---------------------------------------------------------------------------*/
+
+main {
+  background-color: var(--white);
+  max-width: 1440px;
+}
+
+main h2 {
+  font-size: 3em;
+}
+
+.cd-service {
+  max-width: 350px;
+  min-width: 320px;
+}
+
+/* Account section ---------------------------------------------------------------------------*/
+
+.user-space-div {
+  z-index: 999;
+  width: 70px;
+  height: 70px;
+  padding: 1em;
+  background-color: var(--autumn);
+  border-radius: 0 0 20% 20%;
+  cursor: pointer;
+}
+.user-space-div:hover,
+.user-space-div:focus {
+  background-color: var(--wood);
+}
+.user-space {
+  font-size: 2em;
+  color: var(--white);
+}
+.account {
+  max-width: 1440px;
+}
+
+.acc-column {
+  min-width: 400px;
+  background-color: var(--greenlight);
+}
+
+.active-service {
+  background-color: var(--greenleaf);
+  color: var(--white);
+}
+
+
+/* User Account Offcanvas --------------------------------------------------------------------------------- */
+
+.user-cnv h2 {
+  color: var(--brown);
+}
+
+
+/* Footer ---------------------------------------------------------------------------*/
+
+footer {
+  max-width: 1440px;
+  background-color: var(--greenleaf);
+  color: var(--light);
+}
