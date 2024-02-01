@@ -7,8 +7,8 @@ use PDO;
 class Connection {
 
   private static $dsn = 'mysql:host=localhost;dbname=garden';
-  private static $username = 'root';
-  private static $password = 'R00T_My5q!';
+  private static $username = 'xxxxxxxxxxxxxxxxxxxxxxxx';
+  private static $password = 'xxxxxxxxxxxxxxxxxxxxxxxx';
 
   /* Retourne un objet de type PDO pour se connecter à la base de données */
   /* Returns a PDO object to connect to the database */
