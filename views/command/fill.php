@@ -9,22 +9,22 @@ $pdo = Connection::getPDO();
 $users = [
   [
     'email' => 'ascagne@albalonga.tr',
-    'password' => password_hash('B@bilL0n', PASSWORD_BCRYPT),
+    'password' => password_hash('xxxxxxxxxxxxx', PASSWORD_BCRYPT),
     'role' => 'admin'
   ],
   [
     'email' => 'celine.duchemin@example.com',
-    'password' => password_hash('Str33tC3!in3', PASSWORD_BCRYPT),
+    'password' => password_hash('xxxxxxxxxxxxx', PASSWORD_BCRYPT),
     'role' => 'user'
   ],
   [
     'email' => 'pierre.thullier@example.fr',
-    'password' => password_hash('St0n3Thu!!13r', PASSWORD_BCRYPT),
+    'password' => password_hash('xxxxxxxxxxxxx', PASSWORD_BCRYPT),
     'role' => 'user'
   ],
   [
     'email' => 'sam.sonite@exemple.fr',
-    'password' => password_hash('Suitc@s3S@m', PASSWORD_BCRYPT),
+    'password' => password_hash('xxxxxxxxxxxxx', PASSWORD_BCRYPT),
     'role' => 'user'
   ]
 ];
